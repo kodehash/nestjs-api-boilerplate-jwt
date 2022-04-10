@@ -1,47 +1,52 @@
 import { Injectable } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
+import { UserDto } from '../users/dto/user.dto';
+import { PeopleService } from "../people/people.service";
 import * as bcrypt from 'bcrypt';
 import { RegisterUserDto } from './dto/register-user.dto';
 import { IUsers } from './../users/interfaces/users.interface';
-import { MailerService } from '../mailer/mailer.service';
 
 @Injectable()
 export class RegisterService {
   constructor(
     private readonly usersService: UsersService,
-    private readonly mailerService: MailerService,
+    private readonly peopleService: PeopleService
   ) {}
 
   public async register(registerUserDto: RegisterUserDto): Promise<IUsers> {
-    registerUserDto.password = bcrypt.hashSync(registerUserDto.password, 8);
 
-    this.sendMailRegisterUser(registerUserDto);
-
-    return this.usersService.create(registerUserDto);
+    const emp = this.peopleService.findEmployeeByEmail(registerUserDto.email);
+    const zohoId = (await emp).id;
+    const password = bcrypt.hashSync(registerUserDto.password, 8);
+  
+    let userDto = new UserDto(registerUserDto.username, zohoId, 
+      registerUserDto.email, registerUserDto.name, password);
+  
+    return this.usersService.create(userDto);
   }
 
-  private sendMailRegisterUser(user): void {
-    this.mailerService
-      .sendMail({
-        to: user.email,
-        from: 'from@example.com',
-        subject: 'Registration successful ✔',
-        text: 'Registration successful!',
-        template: 'index',
-        context: {
-          title: 'Registration successfully',
-          description:
-            "You did it! You registered!, You're successfully registered.✔",
-          nameUser: user.name,
-        },
-      })
-      .then((response) => {
-        console.log(response);
-        console.log('User Registration: Send Mail successfully!');
-      })
-      .catch((err) => {
-        console.log(err);
-        console.log('User Registration: Send Mail Failed!');
-      });
-  }
+  // private sendMailRegisterUser(user): void {
+  //   this.mailerService
+  //     .sendMail({
+  //       to: user.email,
+  //       from: 'from@example.com',
+  //       subject: 'Registration successful ✔',
+  //       text: 'Registration successful!',
+  //       template: 'index',
+  //       context: {
+  //         title: 'Registration successfully',
+  //         description:
+  //           "You did it! You registered!, You're successfully registered.✔",
+  //         nameUser: user.name,
+  //       },
+  //     })
+  //     .then((response) => {
+  //       console.log(response);
+  //       console.log('User Registration: Send Mail successfully!');
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //       console.log('User Registration: Send Mail Failed!');
+  //     });
+  // }
 }

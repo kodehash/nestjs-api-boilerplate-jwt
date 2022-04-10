@@ -4,10 +4,9 @@ import { RegisterController } from './register.controller';
 import { RegisterService } from './register.service';
 import { UsersService } from '../users/users.service';
 import { Users } from '../users/entities/users.entity';
-import { MailerModule } from 'src/mailer/mailer.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Users]), MailerModule],
+  imports: [TypeOrmModule.forFeature([Users])],
   controllers: [RegisterController],
   providers: [RegisterService, UsersService],
 })

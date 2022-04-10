@@ -1,18 +1,15 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
-@Entity({ database: "paama_core" })
-export class Users {
+@Entity({ database: "paama_people" })
+export class Employees {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column("zoho_id")
-  zohoId: number;
+  @Column()
+  firstName: string;
 
   @Column()
-  name: string;
-
-  @Column()
-  username: string;
+  lastName: string;
 
   @Column({
     unique: true,
