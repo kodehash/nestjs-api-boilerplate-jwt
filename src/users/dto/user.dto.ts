@@ -9,13 +9,13 @@ export class UserDto {
     this.name = name;
     this.password = password;
   }
-  
+
   @IsString()
   @MaxLength(30)
   readonly name: string;
 
   @IsNotEmpty()
-  zohoId: number;
+  zohoId: string;
 
   @IsString()
   @MaxLength(40)

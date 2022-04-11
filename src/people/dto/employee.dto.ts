@@ -2,18 +2,20 @@ import { MaxLength, IsNotEmpty, IsEmail, IsString } from "class-validator";
 
 export class EmployeeDto {
   @IsString()
-  @MaxLength(30)
-  readonly name: string;
+  readonly firstName: string;
 
   @IsString()
-  @MaxLength(40)
-  readonly username: string;
+  readonly lastName: string;
 
   @IsEmail()
-  readonly email: string;
+  readonly emailId: string;
 
-  @IsNotEmpty()
   @IsString()
-  @MaxLength(60)
-  password: string;
+  readonly gender: string;
+
+  @IsString()
+  readonly employeeRole: string;
+
+  readonly employeeId: string;
+
 }

@@ -28,6 +28,18 @@ export class UsersService {
     return user;
   }
 
+  public async userExists(email: string, username: string): Promise<Boolean> {
+    
+    const user = await this.userRepository.findOne({
+      where: [
+        { email: email },
+        { username: username }
+      ]
+    })
+    console.log(user);
+    return !user ? false : true;
+  }
+
   public async findById(userId: string): Promise<Users> {
     const user = await this.userRepository.findOne({
       where: {

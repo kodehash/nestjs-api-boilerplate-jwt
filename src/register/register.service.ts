@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { UserDto } from '../users/dto/user.dto';
 import { PeopleService } from "../people/people.service";
@@ -14,7 +14,9 @@ export class RegisterService {
   ) {}
 
   public async register(registerUserDto: RegisterUserDto): Promise<IUsers> {
-
+    if (await this.usersService.userExists(registerUserDto.email, registerUserDto.username)) {
+      throw new BadRequestException(`User with ${registerUserDto.email} or ${registerUserDto.username} already exists`);
+    }
     const emp = this.peopleService.findEmployeeByEmail(registerUserDto.email);
     const zohoId = (await emp).id;
     const password = bcrypt.hashSync(registerUserDto.password, 8);

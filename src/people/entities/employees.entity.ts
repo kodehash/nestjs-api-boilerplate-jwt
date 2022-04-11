@@ -14,8 +14,14 @@ export class Employees {
   @Column({
     unique: true,
   })
-  email: string;
+  emailId: string;
 
-  @Column({ length: 60 })
-  password: string;
+  @Column()
+  gender: string;
+
+  @Column()
+  employeeId: string;
+
+  @Column()
+  employeeRole: string;
 }

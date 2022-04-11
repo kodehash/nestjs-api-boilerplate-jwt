@@ -13,7 +13,7 @@ export class PeopleService {
   public async findEmployeeByEmail(email: string): Promise<Employees> {
     const emp = await this.empRepository.findOne({
       where: {
-        email: email,
+        emailId: email,
       },
     });
 

@@ -5,8 +5,8 @@ export class Users {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column("zoho_id")
-  zohoId: number;
+  @Column({name: "zoho_id", type: 'bigint'})
+  zohoId: string;
 
   @Column()
   name: string;

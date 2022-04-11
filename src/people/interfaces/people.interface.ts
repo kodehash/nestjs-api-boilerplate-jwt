@@ -1,7 +1,9 @@
-export interface IUsers {
+export interface IEmployees {
   readonly id: number;
-  readonly name: string;
-  readonly username: string;
+  readonly firstName: string;
+  readonly lastName: string;
+  readonly gender: string;
   readonly email: string;
-  readonly password: string;
+  readonly employeeRole: string;
+  readonly employeeId: number;
 }

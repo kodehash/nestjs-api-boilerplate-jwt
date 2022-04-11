@@ -12,7 +12,7 @@ import {
 // import { UsersService } from './people.service';
 import { AuthGuard } from '@nestjs/passport';
 // import { UserProfileDto } from './dto/user-profile.dto';
-import { IUsers } from './interfaces/people.interface';
+// import { IEmployees } from './interfaces/people.interface';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('people')

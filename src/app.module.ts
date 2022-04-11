@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 import { LoginModule } from './login/login.module';
 import { RegisterModule } from './register/register.module';
 import { UsersModule } from './users/users.module';
+import { PeopleModule } from './people/people.module';
 import { ForgotPasswordModule } from './forgot-password/forgot-password.module';
 import { ChangePasswordModule } from './change-password/change-password.module';
 import { MailerModule } from './mailer/mailer.module';
@@ -29,6 +30,7 @@ import { ThrottlerModule } from '@nestjs/throttler';
     // LoginModule,
     RegisterModule,
     UsersModule,
+    PeopleModule,
     // ForgotPasswordModule,
     // ChangePasswordModule,
   ],
