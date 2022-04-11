@@ -27,7 +27,7 @@ import { ThrottlerModule } from '@nestjs/throttler';
       }),
     }),
     TypeOrmModule.forRoot(),
-    // LoginModule,
+    LoginModule,
     RegisterModule,
     UsersModule,
     PeopleModule,

@@ -14,14 +14,14 @@ export class RegisterService {
   ) {}
 
   public async register(registerUserDto: RegisterUserDto): Promise<IUsers> {
-    if (await this.usersService.userExists(registerUserDto.email, registerUserDto.username)) {
-      throw new BadRequestException(`User with ${registerUserDto.email} or ${registerUserDto.username} already exists`);
+    if (await this.usersService.userExists(registerUserDto.email)) {
+      throw new BadRequestException(`User with ${registerUserDto.email} already exists`);
     }
     const emp = this.peopleService.findEmployeeByEmail(registerUserDto.email);
     const zohoId = (await emp).id;
     const password = bcrypt.hashSync(registerUserDto.password, 8);
   
-    let userDto = new UserDto(registerUserDto.username, zohoId, 
+    let userDto = new UserDto(zohoId, 
       registerUserDto.email, registerUserDto.name, password);
   
     return this.usersService.create(userDto);

@@ -2,9 +2,8 @@ import { MaxLength, IsNotEmpty, IsEmail, IsString } from "class-validator";
 
 export class UserDto {
 
-  constructor(username, zohoId, email, name, password) {
+  constructor(zohoId, email, name, password) {
     this.email = email;
-    this.username = username;
     this.zohoId = zohoId;
     this.name = name;
     this.password = password;

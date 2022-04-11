@@ -28,15 +28,13 @@ export class UsersService {
     return user;
   }
 
-  public async userExists(email: string, username: string): Promise<Boolean> {
+  public async userExists(email: string): Promise<Boolean> {
     
     const user = await this.userRepository.findOne({
-      where: [
-        { email: email },
-        { username: username }
-      ]
+      where: { 
+        email: email 
+      }
     })
-    console.log(user);
     return !user ? false : true;
   }
 
@@ -98,7 +96,6 @@ export class UsersService {
       const user = await this.userRepository.findOne({id: +id});
       user.name = userProfileDto.name;
       user.email = userProfileDto.email;
-      user.username = userProfileDto.username;
       
       return await this.userRepository.save(user);
     } catch (err) {
